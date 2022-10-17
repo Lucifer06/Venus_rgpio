@@ -31,22 +31,26 @@ cp /data/rgpio/conf/relaystate.py /opt/victronenergy/dbus-systemcalc-py/delegate
 
 
 3/ Need to add Relays 3, 4, 5 and 6 in /etc/venus/gpio_list so they can be configured on the GUI
+
 mv /etc/venus/gpio_list /etc/venus/gpio_list.ori
 cp /data/rgpio/conf/gpio_list  /etc/venus/gpio_list
 
 
 4/ Need to update Node-Red service for adding the 4x relays
+
 mv /usr/lib/node_modules/@victronenergy/node-red-contrib-victron/src/services/services.json /usr/lib/node_modules/@victronenergy/node-red-contrib-victron/src/services/services.json.ORI
 cp /data/rgpio/Node-Red/services.json /usr/lib/node_modules/@victronenergy/node-red-contrib-victron/src/services/services.json
 
 
 5/ Reboot or restart the services
+
 svc -d /service/dbus-systemcalc-py/ ; svc -u /service/dbus-systemcalc-py/
 svc -d /service/gui ; svc -u /service/gui
 svc -d /service/node-red-venus ; svc -u /service/node-red-venus
 
 
 6/ Display and configure the additional 4x relais in the Venus GUI
+
 Name and display the additional relays from Settings / Relays in the GUI.
 You can swipe to a specific page with the 6x relays, but I believe this is provided by the excellent GuiMods add-on from Kwinderm.
 
@@ -54,6 +58,7 @@ You can swipe to a specific page with the 6x relays, but I believe this is provi
 
 
 7/ Test with command lines
+
 List of all dbus relays and their status:
 dbus -y com.victronenergy.system /Relay GetValue
 
@@ -63,12 +68,14 @@ dbus -y com.victronenergy.system /Relay/3/State SetValue 1
 
 
 8/ Using Node-Red for controlling the 8x additional relays
+
 The Relays 3, 4, 5 and 6 are normally controlled with Victron’s Relay Nodes, and their status are correctly reported on the Victron GUI
 The additional 4x relais 7, 8, 9 and 10 are exposed only through Node-Red Dashboard.
 They all require this flow for sensing the status and controlling the remote Relay from the Dingtian box, attached via RS422 (ModBus RTU protocol).
 
 
 9/ Additional Digital Inputs
+
 The Dingtian relay box also offer additional Digital inputs.
 Here is the flow for sensing the values of the Digital Inputs
 
