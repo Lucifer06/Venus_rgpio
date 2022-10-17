@@ -17,6 +17,12 @@ Any suggestion to execute the below steps in a better appropriate way (may be al
 Repository is here:
 https://github.com/Lucifer06/Venus_rgpio
 
+cd /data/
+wget github.com/Lucifer06/Venus_rgpio/releases/download/Latest/rgpio.tar.gz
+tar -xvzf rgpio.tar.gz
+rm rgpio.tar.gz
+
+
 1/ Creating /dev/gpio links at boot so the bus services are automatically created
 
 cd /etc/rcS.d
@@ -70,8 +76,10 @@ dbus -y com.victronenergy.system /Relay/3/State SetValue 1
 8/ Using Node-Red for controlling the 8x additional relays
 
 The Relays 3, 4, 5 and 6 are normally controlled with Victron’s Relay Nodes, and their status are correctly reported on the Victron GUI
+Use flow Relays3456.json as example
+
 The additional 4x relais 7, 8, 9 and 10 are exposed only through Node-Red Dashboard.
-They all require this flow for sensing the status and controlling the remote Relay from the Dingtian box, attached via RS422 (ModBus RTU protocol).
+They all require the flow Dingtian_Relays.json for sensing the status and controlling the remote Relay from the Dingtian box, attached via RS422 (ModBus RTU protocol).
 
 
 9/ Additional Digital Inputs
