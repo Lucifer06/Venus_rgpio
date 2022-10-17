@@ -18,11 +18,13 @@ Repository is here:
 https://github.com/Lucifer06/Venus_rgpio
 
 1/ Creating /dev/gpio links at boot so the bus services are automatically created
+
 cd /etc/rcS.d
 ln -s /data/rgpio/conf/S90rgpio_pins.sh /etc/rcS.d/S90rgpio_pins.sh
 
 
 2/ Modify Relaystate Python script
+
 mv /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py.ori
 cp /data/rgpio/conf/relaystate.py /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py
 
