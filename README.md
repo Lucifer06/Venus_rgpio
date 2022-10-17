@@ -1,9 +1,8 @@
 # Venus_rgpio
 Remote Relay for Cerbo GX
-
 Adding external Relays to Cerbo GX
 
-As I wanted the relays to not rely on an external Ethernet network, I went with a Modbus/RTU based relai.
+As I wanted the relays to not rely on an external Ethernet network, I went with a Modbus/RTU based relai from Dingtian.
 This box provide 8x relays, that can be controlled with Modbus Serial, but also over IP and with various additional protocols: https://fr.aliexpress.com/item/4000999069820.html They have variants of 4 or 8 relays.
 A USB to RS 485 adapter will be required. I selected this one as this is coming with a USB cable and can fit nicely on the Cerbo GX: https://fr.aliexpress.com/item/1005004778767986.html
 
@@ -18,22 +17,19 @@ Any suggestion to execute the below steps in a better appropriate way (may be al
 Repository is here:
 https://github.com/Lucifer06/Venus_rgpio
 
-1/ Creating /dev/gpio links at boot so the bus services are automatically created 
+1/ Creating /dev/gpio links at boot so the bus services are automatically created
 cd /etc/rcS.d
 ln -s /data/rgpio/conf/S90rgpio_pins.sh /etc/rcS.d/S90rgpio_pins.sh
 
 
 2/ Modify Relaystate Python script
-mv /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py /data/rgpio/conf/relaystate.py.ori
+mv /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py.ori
 cp /data/rgpio/conf/relaystate.py /opt/victronenergy/dbus-systemcalc-py/delegates/relaystate.py
 
 
 3/ Need to add Relays 3, 4, 5 and 6 in /etc/venus/gpio_list so they can be configured on the GUI
-vi /etc/venus/gpio_list 
-- out relay_3
-- out relay_4
-- out relay_5
-- out relay_6
+mv /etc/venus/gpio_list /etc/venus/gpio_list.ori
+cp /data/rgpio/conf/gpio_list  /etc/venus/gpio_list
 
 
 4/ Need to update Node-Red service for adding the 4x relays
@@ -47,9 +43,28 @@ svc -d /service/gui ; svc -u /service/gui
 svc -d /service/node-red-venus ; svc -u /service/node-red-venus
 
 
-6/ Test with command lines
+6/ Display and configure the additional 4x relais in the Venus GUI
+Name and display the additional relays from Settings / Relays in the GUI.
+You can swipe to a specific page with the 6x relays, but I believe this is provided by the excellent GuiMods add-on from Kwinderm.
+![6x relays GUI](https://user-images.githubusercontent.com/10178879/196140950-01c7880d-6900-4fce-ae18-c9d671c7e0e8.png)
+
+
+7/ Test with command lines
 List of all dbus relays and their status:
 dbus -y com.victronenergy.system /Relay GetValue
 
-Close Relay 3: ** doesn’t work! **
+For some reasons I can’t control the relays. If someone knows the correct command line?
+Here is what I tried:
 dbus -y com.victronenergy.system /Relay/3/State SetValue 1
+
+
+8/ Using Node-Red for controlling the 8x additional relays
+The Relays 3, 4, 5 and 6 are normally controlled with Victron’s Relay Nodes, and their status are correctly reported on the Victron GUI
+The additional 4x relais 7, 8, 9 and 10 are exposed only through Node-Red Dashboard.
+They all require this flow for sensing the status and controlling the remote Relay from the Dingtian box, attached via RS422 (ModBus RTU protocol).
+
+
+9/ Additional Digital Inputs
+The Dingtian relay box also offer additional Digital inputs.
+Here is the flow for sensing the values of the Digital Inputs
+
