@@ -1,5 +1,36 @@
 #! /bin/sh
-
+#
+# Prevent running more than onece
+#
+OWN_LOCK=/bin/false 
+#LOCK_FILE=/var/lock/subsys/mod_rgpio.run 
+LOCK_FILE=/data/rgpio/mod_rgpio.run
+ 
+clean_up() { 
+  $OWN_LOCK && rm -f $LOCK_FILE 
+} 
+ 
+trap clean_up EXIT SIGINT SIGKILL 
+     
+if [ -e $LOCK_FILE ]; then 
+	sleep 0.1
+	if [ -e $LOCK_FILE ]; then
+# second chance....
+        	sleep 0.1
+        	if [ -e $LOCK_FILE ]; then
+#third chance....        
+    			echo "Lock file exists, exiting." >&2 
+    			exit 1 
+		fi
+	fi
+else 
+    if ! touch $LOCK_FILE; then 
+      echo "Failed to create lock file, exiting." >&2 
+      exit 1 
+    fi 
+    OWN_LOCK=/bin/true 
+fi 
+ 
 function Read_Relay() {
 /data/rgpio/modpoll/arm-linux-gnueabihf/modpoll -m rtu -b 115200 -p none -d 8 -1 -r 2 -s 1 -c 1 $1
 }
@@ -15,6 +46,7 @@ function Write_Relay() {
 #
 # Check if read or Write command
 #
+
 if [ "$#" -eq 2 ]; then
 	msg=$(echo -n $($1 $2) | awk '{print $NF}')
 	number=$(($msg))
@@ -32,4 +64,3 @@ else
 		exit 1
 	fi
 fi
-
