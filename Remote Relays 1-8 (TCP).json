@@ -1,0 +1,1437 @@
+[
+    {
+        "id": "63b8d2c4.c0b72c",
+        "type": "tab",
+        "label": "Remote Relays 1-8 (TCP)",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b80da51a.e9df88",
+        "type": "inject",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Read Register 0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "15aae45b.b0db2c"
+            ]
+        ]
+    },
+    {
+        "id": "15aae45b.b0db2c",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Read_Val",
+        "func": "msg.payload = {\n    'fc' : 3,\n    'unitid' : 1,\n    'address' : 0,\n    'quantity' : 1\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "db0d349c.ebfbb8"
+            ]
+        ]
+    },
+    {
+        "id": "db0d349c.ebfbb8",
+        "type": "modbus-flex-getter",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Number of Relays",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "logIOActivities": false,
+        "server": "98970a3050192af7",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 100,
+        "wires": [
+            [
+                "a45e7fe5.f5dea"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8a58329c.efda8",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Winch",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 510,
+        "y": 620,
+        "wires": [
+            [
+                "da2dcd55.c2d2a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "da2dcd55.c2d2a",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "1cc5fa8c.5c1125",
+        "type": "comment",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Read Remote Relays position",
+        "info": "",
+        "x": 200,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "39efc19f.fa39ae",
+        "type": "comment",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Write Remote Relays position",
+        "info": "",
+        "x": 200,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "6c15caeb860b79d0",
+        "type": "inject",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Read Register 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "e7d03bb78455bcca"
+            ]
+        ]
+    },
+    {
+        "id": "e7d03bb78455bcca",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Read_Val",
+        "func": "msg.payload = {\n    'fc' : 3,\n    'unitid' : 1,\n    'address' : 1,\n    'quantity' : 1\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "f96326b40b388c6e"
+            ]
+        ]
+    },
+    {
+        "id": "f96326b40b388c6e",
+        "type": "modbus-flex-getter",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Relay Status (bin)",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "logIOActivities": false,
+        "server": "98970a3050192af7",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "5f5b6154b26055e2",
+                "5cacbaf471b4e157"
+            ]
+        ]
+    },
+    {
+        "id": "1b45b679f5843322",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Anchor Light",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 530,
+        "y": 680,
+        "wires": [
+            [
+                "1d9cf9df43ee47b3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1d9cf9df43ee47b3",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "f8edb847fb978a02",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Navigation Lights",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 740,
+        "wires": [
+            [
+                "c120910b4a784646"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c120910b4a784646",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "1e51b9518ca6f516",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Hydro Generator",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 800,
+        "wires": [
+            [
+                "3d6806d984150fba"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3d6806d984150fba",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "73d92079aab20608",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Victron Centaur",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 540,
+        "y": 860,
+        "wires": [
+            [
+                "36f3a3016febde2a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "36f3a3016febde2a",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "0b259387c13440e8",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Input 6 -> Relay 6",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 920,
+        "wires": [
+            [
+                "e73147f54e55fd8a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e73147f54e55fd8a",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "935080e6033bd4e5",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Input 7 -> Relay 7",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 980,
+        "wires": [
+            [
+                "fd69328ae6f4d4f5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fd69328ae6f4d4f5",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "840b0efc1deaa0c4",
+        "type": "modbus-flex-write",
+        "z": "63b8d2c4.c0b72c",
+        "name": "Input 8 -> Relay 8",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "server": "98970a3050192af7",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 1040,
+        "wires": [
+            [
+                "2e55920e0d5fd0f3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2e55920e0d5fd0f3",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "e4ce0ea16874f6f6",
+        "type": "victron-output-relay",
+        "z": "63b8d2c4.c0b72c",
+        "service": "com.victronenergy.system",
+        "path": "/Relay/2/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system",
+            "name": "Venus device",
+            "paths": [
+                {
+                    "path": "/Relay/0/State",
+                    "type": "enum",
+                    "name": "Venus relay 1 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true,
+                    "disabled": true,
+                    "warning": "The relays are configured for <strong>alarm</strong> function. Please navigate to Settings > Relay and change it to manual."
+                },
+                {
+                    "path": "/Relay/1/State",
+                    "type": "enum",
+                    "name": "Venus relay 2 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/2/State",
+                    "type": "enum",
+                    "name": "Venus relay 3 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/3/State",
+                    "type": "enum",
+                    "name": "Venus relay 4 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/4/State",
+                    "type": "enum",
+                    "name": "Venus relay 5 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/5/State",
+                    "type": "enum",
+                    "name": "Venus relay 6 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                }
+            ]
+        },
+        "pathObj": {
+            "path": "/Relay/2/State",
+            "type": "enum",
+            "name": "Venus relay 3 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "writable": true
+        },
+        "initial": "",
+        "name": "",
+        "x": 840,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "9f8e9e7588ea2903",
+        "type": "victron-output-relay",
+        "z": "63b8d2c4.c0b72c",
+        "service": "com.victronenergy.system",
+        "path": "/Relay/3/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system",
+            "name": "Venus device",
+            "paths": [
+                {
+                    "path": "/Relay/0/State",
+                    "type": "enum",
+                    "name": "Venus relay 1 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true,
+                    "disabled": true,
+                    "warning": "The relays are configured for <strong>alarm</strong> function. Please navigate to Settings > Relay and change it to manual."
+                },
+                {
+                    "path": "/Relay/1/State",
+                    "type": "enum",
+                    "name": "Venus relay 2 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/2/State",
+                    "type": "enum",
+                    "name": "Venus relay 3 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/3/State",
+                    "type": "enum",
+                    "name": "Venus relay 4 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/4/State",
+                    "type": "enum",
+                    "name": "Venus relay 5 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/5/State",
+                    "type": "enum",
+                    "name": "Venus relay 6 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                null,
+                null
+            ]
+        },
+        "pathObj": {
+            "path": "/Relay/3/State",
+            "type": "enum",
+            "name": "Venus relay 4 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "writable": true
+        },
+        "initial": "",
+        "name": "",
+        "x": 840,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "49446e4117d8fc1a",
+        "type": "victron-output-relay",
+        "z": "63b8d2c4.c0b72c",
+        "service": "com.victronenergy.system",
+        "path": "/Relay/4/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system",
+            "name": "Venus device",
+            "paths": [
+                {
+                    "path": "/Relay/0/State",
+                    "type": "enum",
+                    "name": "Venus relay 1 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true,
+                    "disabled": true,
+                    "warning": "The relays are configured for <strong>alarm</strong> function. Please navigate to Settings > Relay and change it to manual."
+                },
+                {
+                    "path": "/Relay/1/State",
+                    "type": "enum",
+                    "name": "Venus relay 2 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/2/State",
+                    "type": "enum",
+                    "name": "Venus relay 3 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/3/State",
+                    "type": "enum",
+                    "name": "Venus relay 4 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/4/State",
+                    "type": "enum",
+                    "name": "Venus relay 5 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/5/State",
+                    "type": "enum",
+                    "name": "Venus relay 6 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                null,
+                null
+            ]
+        },
+        "pathObj": {
+            "path": "/Relay/4/State",
+            "type": "enum",
+            "name": "Venus relay 5 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "writable": true
+        },
+        "initial": "",
+        "name": "",
+        "x": 840,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5919047da7edab2e",
+        "type": "victron-output-relay",
+        "z": "63b8d2c4.c0b72c",
+        "service": "com.victronenergy.system",
+        "path": "/Relay/5/State",
+        "serviceObj": {
+            "service": "com.victronenergy.system",
+            "name": "Venus device",
+            "paths": [
+                {
+                    "path": "/Relay/0/State",
+                    "type": "enum",
+                    "name": "Venus relay 1 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true,
+                    "disabled": true,
+                    "warning": "The relays are configured for <strong>alarm</strong> function. Please navigate to Settings > Relay and change it to manual."
+                },
+                {
+                    "path": "/Relay/1/State",
+                    "type": "enum",
+                    "name": "Venus relay 2 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/2/State",
+                    "type": "enum",
+                    "name": "Venus relay 3 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/3/State",
+                    "type": "enum",
+                    "name": "Venus relay 4 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/4/State",
+                    "type": "enum",
+                    "name": "Venus relay 5 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                {
+                    "path": "/Relay/5/State",
+                    "type": "enum",
+                    "name": "Venus relay 6 state",
+                    "enum": {
+                        "0": "Open",
+                        "1": "Closed"
+                    },
+                    "writable": true
+                },
+                null,
+                null
+            ]
+        },
+        "pathObj": {
+            "path": "/Relay/5/State",
+            "type": "enum",
+            "name": "Venus relay 6 state",
+            "enum": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "writable": true
+        },
+        "initial": "",
+        "name": "",
+        "x": 840,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5f5b6154b26055e2",
+        "type": "buffer-parser",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "data": "payload[\"data\"]",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "8bit",
+                "name": "0",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "value",
+        "resultTypeType": "output",
+        "multipleResult": true,
+        "fanOutMultipleResult": true,
+        "setTopic": false,
+        "outputs": 1,
+        "x": 770,
+        "y": 160,
+        "wires": [
+            [
+                "4139f5f6ff7097fd"
+            ]
+        ]
+    },
+    {
+        "id": "f6283ca0107e7ad1",
+        "type": "buffer-parser",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "data": "payload[\"0\"].bits",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "item1",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item2",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 1,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item3",
+                "offset": 5,
+                "length": 1,
+                "offsetbit": 2,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item4",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item5",
+                "offset": 9,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item6",
+                "offset": 11,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item7",
+                "offset": 13,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "item8",
+                "offset": 15,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "value",
+        "resultTypeType": "output",
+        "multipleResult": true,
+        "fanOutMultipleResult": true,
+        "setTopic": true,
+        "outputs": 8,
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "e4ce0ea16874f6f6"
+            ],
+            [
+                "9f8e9e7588ea2903"
+            ],
+            [
+                "49446e4117d8fc1a"
+            ],
+            [
+                "5919047da7edab2e"
+            ],
+            [
+                "75502e966d77d473"
+            ],
+            [
+                "f261f397e9c8b677"
+            ],
+            [
+                "dbc47ce2d9bdc0a4"
+            ],
+            [
+                "e48e9db39e935522"
+            ]
+        ]
+    },
+    {
+        "id": "0d141eeb49f3269f",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Buffer",
+        "links": [
+            "4139f5f6ff7097fd"
+        ],
+        "x": 115,
+        "y": 300,
+        "wires": [
+            [
+                "bb1820798f1a95c2"
+            ]
+        ]
+    },
+    {
+        "id": "4139f5f6ff7097fd",
+        "type": "link out",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link out Buffer",
+        "mode": "link",
+        "links": [
+            "0d141eeb49f3269f"
+        ],
+        "x": 875,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cdde325f26e47fcf",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 257,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 256,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 620,
+        "wires": [
+            [
+                "8a58329c.efda8"
+            ]
+        ]
+    },
+    {
+        "id": "7c92fb2764a6e884",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay1",
+        "links": [
+            "c43a1fbf0c440de0",
+            "58676c50afc1d4cf"
+        ],
+        "x": 235,
+        "y": 620,
+        "wires": [
+            [
+                "cdde325f26e47fcf"
+            ]
+        ]
+    },
+    {
+        "id": "bf3d39d94dc2a52a",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay2",
+        "links": [
+            "1a3b1e46672db0c5"
+        ],
+        "x": 235,
+        "y": 680,
+        "wires": [
+            [
+                "87c63fb1b68ea164"
+            ]
+        ]
+    },
+    {
+        "id": "786d9771b7ef6aec",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay3",
+        "links": [
+            "0ad47de014e7a526"
+        ],
+        "x": 235,
+        "y": 740,
+        "wires": [
+            [
+                "388f7cbf4c56d230"
+            ]
+        ]
+    },
+    {
+        "id": "bfc2609f46eaaefc",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay4",
+        "links": [
+            "ea7bbcfe6ce738e6"
+        ],
+        "x": 235,
+        "y": 800,
+        "wires": [
+            [
+                "bbd926a042d830a5"
+            ]
+        ]
+    },
+    {
+        "id": "87c63fb1b68ea164",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 514,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 512,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 680,
+        "wires": [
+            [
+                "1b45b679f5843322"
+            ]
+        ]
+    },
+    {
+        "id": "388f7cbf4c56d230",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 1028,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 1024,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 740,
+        "wires": [
+            [
+                "f8edb847fb978a02"
+            ]
+        ]
+    },
+    {
+        "id": "bbd926a042d830a5",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 2056,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 2048,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 800,
+        "wires": [
+            [
+                "1e51b9518ca6f516"
+            ]
+        ]
+    },
+    {
+        "id": "bb1820798f1a95c2",
+        "type": "rbe",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 230,
+        "y": 300,
+        "wires": [
+            [
+                "f6283ca0107e7ad1"
+            ]
+        ]
+    },
+    {
+        "id": "3e3b2b99dfbd41e3",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay5",
+        "links": [
+            "50fb43ed46d4d766",
+            "58676c50afc1d4cf"
+        ],
+        "x": 235,
+        "y": 860,
+        "wires": [
+            [
+                "545030663575dd15"
+            ]
+        ]
+    },
+    {
+        "id": "d4f4c5d7cd651fec",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay6",
+        "links": [
+            "c63f155f03a9a89f"
+        ],
+        "x": 235,
+        "y": 920,
+        "wires": [
+            [
+                "3d9427d82cd89c16"
+            ]
+        ]
+    },
+    {
+        "id": "5c2040d8337fe4ec",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay7",
+        "links": [
+            "637beb068507a6c9"
+        ],
+        "x": 235,
+        "y": 980,
+        "wires": [
+            [
+                "82cbb75f4cd5a440"
+            ]
+        ]
+    },
+    {
+        "id": "e9b9bf461419eceb",
+        "type": "link in",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link in Relay8",
+        "links": [
+            "05e39e20b9c36a30"
+        ],
+        "x": 235,
+        "y": 1040,
+        "wires": [
+            [
+                "337d2c8221c8e254"
+            ]
+        ]
+    },
+    {
+        "id": "545030663575dd15",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 4112,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 4096,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 860,
+        "wires": [
+            [
+                "73d92079aab20608"
+            ]
+        ]
+    },
+    {
+        "id": "3d9427d82cd89c16",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 8224,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 8192,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 920,
+        "wires": [
+            [
+                "0b259387c13440e8"
+            ]
+        ]
+    },
+    {
+        "id": "82cbb75f4cd5a440",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 16448,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 16384,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 980,
+        "wires": [
+            [
+                "935080e6033bd4e5"
+            ]
+        ]
+    },
+    {
+        "id": "337d2c8221c8e254",
+        "type": "function",
+        "z": "63b8d2c4.c0b72c",
+        "name": "On-Off",
+        "func": "if (msg.payload == 1) {\n    msg.payload = {\n        'value' : 32896,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };\n} else {\n    msg.payload = {\n        'value' : 32768,\n        'fc' : 6,\n        'unitid' : 1,\n        'address' : 2,\n        'quantity' : 1\n    };    \n}    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1040,
+        "wires": [
+            [
+                "840b0efc1deaa0c4"
+            ]
+        ]
+    },
+    {
+        "id": "75502e966d77d473",
+        "type": "link out",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link out Remote_Relay5",
+        "mode": "link",
+        "links": [
+            "1c11fc8338b78192"
+        ],
+        "x": 715,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f261f397e9c8b677",
+        "type": "link out",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link out Remote_Relay6",
+        "mode": "link",
+        "links": [
+            "7329631484cacb49"
+        ],
+        "x": 715,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "dbc47ce2d9bdc0a4",
+        "type": "link out",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link out Remote_Relay7",
+        "mode": "link",
+        "links": [
+            "c592f6d72006ab27"
+        ],
+        "x": 715,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e48e9db39e935522",
+        "type": "link out",
+        "z": "63b8d2c4.c0b72c",
+        "name": "link out Remote_Relay8",
+        "mode": "link",
+        "links": [
+            "035d75d5cde68cc9"
+        ],
+        "x": 715,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a45e7fe5.f5dea",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 780,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "5cacbaf471b4e157",
+        "type": "debug",
+        "z": "63b8d2c4.c0b72c",
+        "name": "debug 30",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "98970a3050192af7",
+        "type": "modbus-client",
+        "name": "Dingtian IOT Relay TCP",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.20.221",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true
+    }
+]

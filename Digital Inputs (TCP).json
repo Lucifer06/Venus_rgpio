@@ -1,0 +1,1370 @@
+[
+    {
+        "id": "a2f68be9082f8481",
+        "type": "tab",
+        "label": "Digital Inputs (TCP)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f74a8e70342616f7",
+        "type": "inject",
+        "z": "a2f68be9082f8481",
+        "name": "Read Register 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "227668eae179297a"
+            ]
+        ]
+    },
+    {
+        "id": "227668eae179297a",
+        "type": "function",
+        "z": "a2f68be9082f8481",
+        "name": "Read_Val",
+        "func": "msg.payload = {\n    'fc' : 3,\n    'unitid' : 1,\n    'address' : 10,\n    'quantity' : 1\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 380,
+        "wires": [
+            [
+                "64332d4294333b4f"
+            ]
+        ]
+    },
+    {
+        "id": "64332d4294333b4f",
+        "type": "modbus-flex-getter",
+        "z": "a2f68be9082f8481",
+        "name": "Digital Input (bin)",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "98970a3050192af7",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [],
+            [
+                "2f9541144a66fab9"
+            ]
+        ]
+    },
+    {
+        "id": "c92f4534b7772068",
+        "type": "comment",
+        "z": "a2f68be9082f8481",
+        "name": "Read Remote Digital Input",
+        "info": "",
+        "x": 170,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9787f94c0828bf93",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 1 - Nav Instrument",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1570,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f9541144a66fab9",
+        "type": "buffer-parser",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "data": "payload[\"data\"]",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "8bit",
+                "name": "0",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "value",
+        "resultTypeType": "output",
+        "multipleResult": true,
+        "fanOutMultipleResult": true,
+        "setTopic": false,
+        "outputs": 1,
+        "x": 770,
+        "y": 380,
+        "wires": [
+            [
+                "d99591fad1abd81c"
+            ]
+        ]
+    },
+    {
+        "id": "7d167fc5f6dad117",
+        "type": "buffer-parser",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "data": "payload[\"0\"].bits",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "bool",
+                "name": "item1",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item2",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item3",
+                "offset": 5,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item4",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item5",
+                "offset": 9,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item6",
+                "offset": 11,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item7",
+                "offset": 13,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "item8",
+                "offset": 15,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "value",
+        "resultTypeType": "output",
+        "multipleResult": true,
+        "fanOutMultipleResult": true,
+        "setTopic": true,
+        "outputs": 8,
+        "x": 1130,
+        "y": 380,
+        "wires": [
+            [
+                "9787f94c0828bf93",
+                "fd92597054fcc346"
+            ],
+            [
+                "33c4bef721cff0f1"
+            ],
+            [
+                "e9373b69b78a90a9"
+            ],
+            [
+                "a3a63ec41d016ee5"
+            ],
+            [
+                "dff282b06bb46cf8"
+            ],
+            [
+                "469c6914d6061ef1"
+            ],
+            [
+                "a31049eeb616c164"
+            ],
+            [
+                "bb89fe8496c5818b"
+            ]
+        ]
+    },
+    {
+        "id": "1939cc6f8c2217e2",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 2",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3d3a32db15eb96da",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 3",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f74799837357245",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 4",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20125910f3839b7c",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 5",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a95b0abea0a6ec45",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 6",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "03872a1f50f1fa36",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 7",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "09c17c5adfe94c11",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Input 8",
+        "tooltip": "",
+        "group": "c14c767c7bab0530",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1740,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d99591fad1abd81c",
+        "type": "rbe",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 950,
+        "y": 380,
+        "wires": [
+            [
+                "7d167fc5f6dad117"
+            ]
+        ]
+    },
+    {
+        "id": "cc50e4b1356aa690",
+        "type": "victron-input-digitalinput",
+        "z": "a2f68be9082f8481",
+        "service": "com.victronenergy.digitalinput.input01",
+        "path": "/State",
+        "serviceObj": {
+            "service": "com.victronenergy.digitalinput.input01",
+            "name": "Bilge pump",
+            "paths": [
+                {
+                    "path": "/Alarm",
+                    "type": "enum",
+                    "name": "Digital input alarm",
+                    "enum": {
+                        "0": "No alarm",
+                        "1": "Warning",
+                        "2": "Alarm"
+                    }
+                },
+                {
+                    "path": "/Count",
+                    "type": "float",
+                    "name": "Digital input count"
+                },
+                {
+                    "path": "/State",
+                    "type": "enum",
+                    "name": "Digital input state",
+                    "enum": {
+                        "0": "low",
+                        "1": "high",
+                        "2": "off",
+                        "3": "on",
+                        "4": "no",
+                        "5": "yes",
+                        "6": "open",
+                        "7": "closed",
+                        "8": "ok",
+                        "9": "alarm",
+                        "10": "running",
+                        "11": "stopped"
+                    }
+                },
+                {
+                    "path": "/Type",
+                    "type": "enum",
+                    "name": "Digital input type",
+                    "enum": {
+                        "0": "Disabled",
+                        "1": "Pulse meter",
+                        "2": "Door sensor",
+                        "3": "Bilge pump",
+                        "4": "Bilge alarm",
+                        "5": "Burglar alarm",
+                        "6": "Smoke alarm",
+                        "7": "Fire alarm",
+                        "8": "CO2 alarm",
+                        "9": "Generic input"
+                    }
+                }
+            ]
+        },
+        "pathObj": {
+            "path": "/State",
+            "type": "enum",
+            "name": "Digital input state",
+            "enum": {
+                "0": "low",
+                "1": "high",
+                "2": "off",
+                "3": "on",
+                "4": "no",
+                "5": "yes",
+                "6": "open",
+                "7": "closed",
+                "8": "ok",
+                "9": "alarm",
+                "10": "running",
+                "11": "stopped"
+            }
+        },
+        "initial": "",
+        "name": "",
+        "x": 390,
+        "y": 700,
+        "wires": [
+            [
+                "2856be8114e427c1"
+            ]
+        ]
+    },
+    {
+        "id": "d3dc8c6348690c4c",
+        "type": "victron-input-digitalinput",
+        "z": "a2f68be9082f8481",
+        "service": "com.victronenergy.digitalinput.input02",
+        "path": "/State",
+        "serviceObj": {
+            "service": "com.victronenergy.digitalinput.input02",
+            "name": "Smoke alarm",
+            "paths": [
+                {
+                    "path": "/Alarm",
+                    "type": "enum",
+                    "name": "Digital input alarm",
+                    "enum": {
+                        "0": "No alarm",
+                        "1": "Warning",
+                        "2": "Alarm"
+                    }
+                },
+                {
+                    "path": "/Count",
+                    "type": "float",
+                    "name": "Digital input count"
+                },
+                {
+                    "path": "/State",
+                    "type": "enum",
+                    "name": "Digital input state",
+                    "enum": {
+                        "0": "low",
+                        "1": "high",
+                        "2": "off",
+                        "3": "on",
+                        "4": "no",
+                        "5": "yes",
+                        "6": "open",
+                        "7": "closed",
+                        "8": "ok",
+                        "9": "alarm",
+                        "10": "running",
+                        "11": "stopped"
+                    }
+                },
+                {
+                    "path": "/Type",
+                    "type": "enum",
+                    "name": "Digital input type",
+                    "enum": {
+                        "0": "Disabled",
+                        "1": "Pulse meter",
+                        "2": "Door sensor",
+                        "3": "Bilge pump",
+                        "4": "Bilge alarm",
+                        "5": "Burglar alarm",
+                        "6": "Smoke alarm",
+                        "7": "Fire alarm",
+                        "8": "CO2 alarm",
+                        "9": "Generic input"
+                    }
+                }
+            ]
+        },
+        "pathObj": {
+            "path": "/State",
+            "type": "enum",
+            "name": "Digital input state",
+            "enum": {
+                "0": "low",
+                "1": "high",
+                "2": "off",
+                "3": "on",
+                "4": "no",
+                "5": "yes",
+                "6": "open",
+                "7": "closed",
+                "8": "ok",
+                "9": "alarm",
+                "10": "running",
+                "11": "stopped"
+            }
+        },
+        "initial": "",
+        "name": "",
+        "x": 390,
+        "y": 740,
+        "wires": [
+            [
+                "8d255fe4f057f2d8"
+            ]
+        ]
+    },
+    {
+        "id": "35f876e672e108b1",
+        "type": "victron-input-digitalinput",
+        "z": "a2f68be9082f8481",
+        "service": "com.victronenergy.digitalinput.input03",
+        "path": "/State",
+        "serviceObj": {
+            "service": "com.victronenergy.digitalinput.input03",
+            "name": "Door alarm",
+            "paths": [
+                {
+                    "path": "/Alarm",
+                    "type": "enum",
+                    "name": "Digital input alarm",
+                    "enum": {
+                        "0": "No alarm",
+                        "1": "Warning",
+                        "2": "Alarm"
+                    }
+                },
+                {
+                    "path": "/Count",
+                    "type": "float",
+                    "name": "Digital input count"
+                },
+                {
+                    "path": "/State",
+                    "type": "enum",
+                    "name": "Digital input state",
+                    "enum": {
+                        "0": "low",
+                        "1": "high",
+                        "2": "off",
+                        "3": "on",
+                        "4": "no",
+                        "5": "yes",
+                        "6": "open",
+                        "7": "closed",
+                        "8": "ok",
+                        "9": "alarm",
+                        "10": "running",
+                        "11": "stopped"
+                    }
+                },
+                {
+                    "path": "/Type",
+                    "type": "enum",
+                    "name": "Digital input type",
+                    "enum": {
+                        "0": "Disabled",
+                        "1": "Pulse meter",
+                        "2": "Door sensor",
+                        "3": "Bilge pump",
+                        "4": "Bilge alarm",
+                        "5": "Burglar alarm",
+                        "6": "Smoke alarm",
+                        "7": "Fire alarm",
+                        "8": "CO2 alarm",
+                        "9": "Generic input"
+                    }
+                }
+            ]
+        },
+        "pathObj": {
+            "path": "/State",
+            "type": "enum",
+            "name": "Digital input state",
+            "enum": {
+                "0": "low",
+                "1": "high",
+                "2": "off",
+                "3": "on",
+                "4": "no",
+                "5": "yes",
+                "6": "open",
+                "7": "closed",
+                "8": "ok",
+                "9": "alarm",
+                "10": "running",
+                "11": "stopped"
+            }
+        },
+        "initial": "",
+        "name": "",
+        "x": 380,
+        "y": 780,
+        "wires": [
+            [
+                "79718fd283bfce77"
+            ]
+        ]
+    },
+    {
+        "id": "03d9c0ddbf77ee63",
+        "type": "victron-input-digitalinput",
+        "z": "a2f68be9082f8481",
+        "service": "com.victronenergy.digitalinput.input04",
+        "path": "/State",
+        "serviceObj": {
+            "service": "com.victronenergy.digitalinput.input04",
+            "name": "Bilge alarm",
+            "paths": [
+                {
+                    "path": "/Alarm",
+                    "type": "enum",
+                    "name": "Digital input alarm",
+                    "enum": {
+                        "0": "No alarm",
+                        "1": "Warning",
+                        "2": "Alarm"
+                    }
+                },
+                {
+                    "path": "/Count",
+                    "type": "float",
+                    "name": "Digital input count"
+                },
+                {
+                    "path": "/State",
+                    "type": "enum",
+                    "name": "Digital input state",
+                    "enum": {
+                        "0": "low",
+                        "1": "high",
+                        "2": "off",
+                        "3": "on",
+                        "4": "no",
+                        "5": "yes",
+                        "6": "open",
+                        "7": "closed",
+                        "8": "ok",
+                        "9": "alarm",
+                        "10": "running",
+                        "11": "stopped"
+                    }
+                },
+                {
+                    "path": "/Type",
+                    "type": "enum",
+                    "name": "Digital input type",
+                    "enum": {
+                        "0": "Disabled",
+                        "1": "Pulse meter",
+                        "2": "Door sensor",
+                        "3": "Bilge pump",
+                        "4": "Bilge alarm",
+                        "5": "Burglar alarm",
+                        "6": "Smoke alarm",
+                        "7": "Fire alarm",
+                        "8": "CO2 alarm",
+                        "9": "Generic input"
+                    }
+                }
+            ]
+        },
+        "pathObj": {
+            "path": "/State",
+            "type": "enum",
+            "name": "Digital input state",
+            "enum": {
+                "0": "low",
+                "1": "high",
+                "2": "off",
+                "3": "on",
+                "4": "no",
+                "5": "yes",
+                "6": "open",
+                "7": "closed",
+                "8": "ok",
+                "9": "alarm",
+                "10": "running",
+                "11": "stopped"
+            }
+        },
+        "initial": "",
+        "name": "",
+        "x": 380,
+        "y": 820,
+        "wires": [
+            [
+                "9455237755eb8eb0"
+            ]
+        ]
+    },
+    {
+        "id": "2856be8114e427c1",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Pompe de Cale en Marche",
+        "tooltip": "",
+        "group": "b7dc32707bc98270",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 740,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d255fe4f057f2d8",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Detecteur Fumée",
+        "tooltip": "",
+        "group": "b7dc32707bc98270",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 710,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79718fd283bfce77",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Porte Ouverte",
+        "tooltip": "",
+        "group": "b7dc32707bc98270",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 700,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9455237755eb8eb0",
+        "type": "ui_switch",
+        "z": "a2f68be9082f8481",
+        "name": "",
+        "label": "Eau dans les fonds de cale",
+        "tooltip": "",
+        "group": "b7dc32707bc98270",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 740,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd92597054fcc346",
+        "type": "link out",
+        "z": "a2f68be9082f8481",
+        "name": "link out Int_Nav_Inst",
+        "mode": "link",
+        "links": [
+            "6029fe95bc42abdf",
+            "6bff4066c95c8fd2"
+        ],
+        "x": 1475,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "33c4bef721cff0f1",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 280,
+        "wires": [
+            [
+                "1939cc6f8c2217e2"
+            ]
+        ]
+    },
+    {
+        "id": "e9373b69b78a90a9",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 320,
+        "wires": [
+            [
+                "3d3a32db15eb96da"
+            ]
+        ]
+    },
+    {
+        "id": "a3a63ec41d016ee5",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 360,
+        "wires": [
+            [
+                "2f74799837357245"
+            ]
+        ]
+    },
+    {
+        "id": "dff282b06bb46cf8",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 400,
+        "wires": [
+            [
+                "20125910f3839b7c"
+            ]
+        ]
+    },
+    {
+        "id": "469c6914d6061ef1",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 440,
+        "wires": [
+            [
+                "a95b0abea0a6ec45"
+            ]
+        ]
+    },
+    {
+        "id": "a31049eeb616c164",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 480,
+        "wires": [
+            [
+                "03872a1f50f1fa36"
+            ]
+        ]
+    },
+    {
+        "id": "bb89fe8496c5818b",
+        "type": "change",
+        "z": "a2f68be9082f8481",
+        "name": "Bool->Number",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1560,
+        "y": 520,
+        "wires": [
+            [
+                "09c17c5adfe94c11"
+            ]
+        ]
+    },
+    {
+        "id": "98970a3050192af7",
+        "type": "modbus-client",
+        "name": "Dingtian IOT Relay TCP",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.20.221",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true
+    },
+    {
+        "id": "c14c767c7bab0530",
+        "type": "ui_group",
+        "name": "Remote Inputs",
+        "tab": "fe96b5b505fa39b7",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b7dc32707bc98270",
+        "type": "ui_group",
+        "name": "Cerbo GX",
+        "tab": "fe96b5b505fa39b7",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fe96b5b505fa39b7",
+        "type": "ui_tab",
+        "name": "Inputs",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    }
+]
