@@ -92,7 +92,7 @@ Ecriture registre Relai1 = Off:
 
 10/ Using Node-Red for controlling the 8x additional relays
 The Relays 3, 4, 5 and 6 are normally controlled with Victron’s Relay Nodes, and their status are correctly reported on the Victron GUI
-Use flow Relays3456.json as example
+Use flow "Remote Relays 1-8 (RTU).json" as example
 
 The additional 4x relais 7, 8, 9 and 10 are exposed only through Node-Red Dashboard.
 They all require the flow Dingtian_Relays.json for sensing the status and controlling the remote Relay from the Dingtian box, attached via RS422 (ModBus RTU protocol).
