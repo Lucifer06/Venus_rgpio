@@ -47,10 +47,17 @@ svc -d /service/node-red-venus
 6/ Make serial-starter to ignore the USB-RS485 interface
 identify ID_MODEL of the interface
 udevadm info --query=property --name=/dev/ttyUSB0
+With CH341 chipset, ID_VENDOR is USB_Serial
+As they don’t put any unique serial number there is an issue when multiple Serial interfaces are using the same CH341 chipset.
+This is the case for example with the USB interface to connect the DALI BMS.
+Unfortunately I haven’t found a way to program a serial number, so the solution is to track the position of the RGPIO interface:
+Always connect the USB-RS485 interface to the first USB interface.
 
 Add the following lines to /etc/udev/rules.d/serial-starter.rules
 #Serial-starter to ignore the USB-RS485 (ID_MODEL=USB_Serial) so USB interface for RGPIO works
-ACTION=="add", ENV{ID_BUS}=="usb", ENV{ID_MODEL}=="USB_Serial", ENV{VE_SERVICE}="ignore"
+#ACTION=="add", ENV{ID_BUS}=="usb", ENV{ID_MODEL}=="USB_Serial", ENV{VE_SERVICE}="ignore"
+#Serial-starter to ignore the USB-RS485 converter attached to the first USB port so USB interface for RGPIO works
+ACTION=="add", ENV{ID_BUS}=="usb", ENV{ID_PATH_TAG}=="platform-1c14400_usb-usb-0_1_1_0", ENV{VE_SERVICE}="ignore"
 #
 
 Alternatively, run
