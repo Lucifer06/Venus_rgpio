@@ -18,6 +18,9 @@ wget github.com/Lucifer06/Venus_rgpio/releases/download/Latest/rgpio.tar.gz
 tar -xvzf rgpio.tar.gz
 rm rgpio.tar.gz
 
+0/ Configuration of the Dingtian IOT Relay module
+Connect the ethernet interface of the module and access to its configuration page (192.168.1.100 and admin/admin by default).
+Configure the RS485 with Protocol Modbus-RTU and set address to 1 (for the first unit).
 
 1/ Creating /dev/gpio links at boot so the bus services are automatically created 
 ln -s /data/rgpio/conf/S90rgpio_pins.sh /etc/rcS.d/S90rgpio_pins.sh
