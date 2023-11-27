@@ -1,3 +1,5 @@
+** This is now old stuff, now replaced with RemoteGPIO: https://github.com/Lucifer06/RemoteGPIO **
+
 As I wanted the relays to not rely on an external Ethernet network, I went with a Modbus/RTU based relai from Dingtian.
 This box provide 8x relays, that can be controlled with Modbus Serial, but also over IP and with various additional protocols: https://fr.aliexpress.com/item/4000999069820.html They have variants of 4 or 8 relays.
 A USB to RS 485 adapter will be required. I selected this one as this is coming with a USB cable and can fit nicely on the Cerbo GX: https://fr.aliexpress.com/item/1005004778767986.html
